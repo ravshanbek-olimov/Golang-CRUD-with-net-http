@@ -17,11 +17,12 @@ func (c *Controller) Movie(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "GET" {
-		c.GetByIdMovie(w, r)
-	}
-
-	if r.Method == "GET" {
-		c.GetListMovie(w, r)
+		id := r.URL.Query().Get("id")
+		if id == "" {
+			c.GetListMovie(w, r)
+		} else {
+			c.GetByIdMovie(w, r)
+		}
 	}
 
 	if r.Method == "PUT" {
